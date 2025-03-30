@@ -1,12 +1,13 @@
+import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import PersonLink from './PersonLink';
 
 type Props = {
   people: Person[];
-  selectedSlug?: string;
 };
 
-const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
+const PeopleTable: React.FC<Props> = ({ people }) => {
+  const { slug } = useParams();
   const findPersonByName = (name: string) => people.find(p => p.name === name);
 
   return (
@@ -33,7 +34,7 @@ const PeopleTable: React.FC<Props> = ({ people, selectedSlug }) => {
           const father = person.fatherName
             ? findPersonByName(person.fatherName)
             : null;
-          const isSelected = person.slug === selectedSlug;
+          const isSelected = person.slug === slug;
 
           return (
             <tr

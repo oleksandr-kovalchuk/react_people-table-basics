@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import { getPeople } from '../api';
 import { Loader } from './Loader';
@@ -9,7 +8,6 @@ const PeoplePage = () => {
   const [people, setPeople] = useState<Person[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { slug } = useParams();
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -48,7 +46,7 @@ const PeoplePage = () => {
                     There are no people on the server
                   </p>
                 ) : (
-                  <PeopleTable people={people} selectedSlug={slug} />
+                  <PeopleTable people={people} />
                 )}
               </>
             )}

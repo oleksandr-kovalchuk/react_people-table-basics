@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { Person } from '../types';
+import classNames from 'classnames';
 
 interface Props {
   person?: Person;
@@ -15,7 +16,9 @@ const PersonLink: React.FC<Props> = ({ person }) => {
   return (
     <NavLink
       to={`/people/${person.slug}`}
-      className={`has-text-weight-bold ${isFemale ? 'has-text-danger' : ''}`}
+      className={classNames('has-text-weight-bold', {
+        'has-text-danger': isFemale,
+      })}
     >
       {person.name}
     </NavLink>

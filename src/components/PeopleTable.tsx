@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Person } from '../types';
 import PersonLink from './PersonLink';
+import classNames from 'classnames';
 
 type Props = {
   people: Person[];
@@ -8,6 +9,7 @@ type Props = {
 
 const PeopleTable: React.FC<Props> = ({ people }) => {
   const { slug } = useParams();
+
   const findPersonByName = (name: string) => people.find(p => p.name === name);
 
   return (
@@ -31,23 +33,27 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
           const mother = person.motherName
             ? findPersonByName(person.motherName)
             : null;
+
           const father = person.fatherName
             ? findPersonByName(person.fatherName)
             : null;
+
           const isSelected = person.slug === slug;
 
           return (
             <tr
               key={person.slug}
               data-cy="person"
-              className={isSelected ? 'has-background-warning' : ''}
+              className={classNames({ 'has-background-warning': isSelected })}
             >
               <td>
                 <PersonLink person={person} />
               </td>
+
               <td>{person.sex}</td>
               <td>{person.born}</td>
               <td>{person.died}</td>
+
               <td>
                 {mother ? (
                   <PersonLink person={mother} />
@@ -55,6 +61,7 @@ const PeopleTable: React.FC<Props> = ({ people }) => {
                   person.motherName || '-'
                 )}
               </td>
+
               <td>
                 {father ? (
                   <PersonLink person={father} />

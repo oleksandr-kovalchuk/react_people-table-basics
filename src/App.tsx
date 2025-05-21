@@ -8,6 +8,7 @@ import PageNotFound from './components/PageNotFound';
 export const App = () => (
   <div data-cy="app">
     <Navbar />
+
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/home" element={<Navigate to="/" replace />} />
